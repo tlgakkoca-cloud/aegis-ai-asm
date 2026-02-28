@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/kullanici-adin/aegis-ai-asm/internal/discovery"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/discovery"
 )
 
 // Reporter writes discovery outputs to disk in different formats.

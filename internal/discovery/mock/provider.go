@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/kullanici-adin/aegis-ai-asm/internal/discovery"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/discovery"
 )
 
 func init() {

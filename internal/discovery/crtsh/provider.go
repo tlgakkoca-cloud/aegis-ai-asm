@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kullanici-adin/aegis-ai-asm/internal/discovery"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/discovery"
 )
 
 const endpoint = "https://crt.sh/"
@@ -46,7 +46,7 @@ func (p *Provider) Discover(ctx context.Context, domain string) ([]discovery.Ass
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "Aegis-ASM/0.1 (+github.com/kullanici-adin/aegis-ai-asm)")
+	req.Header.Set("User-Agent", "Aegis-ASM/0.1 (+github.com/tlgakkoca-cloud/aegis-ai-asm)")
 
 	resp, err := p.client.Do(req)
 	if err != nil {

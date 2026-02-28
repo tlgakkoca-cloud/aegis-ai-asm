@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/kullanici-adin/aegis-ai-asm/internal/config"
-	"github.com/kullanici-adin/aegis-ai-asm/internal/discovery"
-	crtshprovider "github.com/kullanici-adin/aegis-ai-asm/internal/discovery/crtsh"
-	discoverymock "github.com/kullanici-adin/aegis-ai-asm/internal/discovery/mock"
-	"github.com/kullanici-adin/aegis-ai-asm/internal/logger"
-	"github.com/kullanici-adin/aegis-ai-asm/internal/reporter"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/config"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/discovery"
+	crtshprovider "github.com/tlgakkoca-cloud/aegis-ai-asm/internal/discovery/crtsh"
+	discoverymock "github.com/tlgakkoca-cloud/aegis-ai-asm/internal/discovery/mock"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/logger"
+	"github.com/tlgakkoca-cloud/aegis-ai-asm/internal/reporter"
 	"go.uber.org/zap"
 )
 
