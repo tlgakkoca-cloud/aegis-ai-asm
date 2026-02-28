@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -39,14 +40,15 @@ func (p *Provider) Discover(ctx context.Context, domain string) ([]discovery.Ass
 	}
 
 	query := url.Values{}
-	query.Set("q", fmt.Sprintf("%%25.%s", domain))
+	query.Set("q", fmt.Sprintf("%%.%s", domain))
 	query.Set("output", "json")
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint+"?"+query.Encode(), nil)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "Aegis-ASM/0.1 (+github.com/tlgakkoca-cloud/aegis-ai-asm)")
+	req.Header.Set("User-Agent", "curl/8.4.0 (+github.com/tlgakkoca-cloud/aegis-ai-asm)")
+	req.Header.Set("Accept", "application/json")
 
 	resp, err := p.client.Do(req)
 	if err != nil {
@@ -58,11 +60,20 @@ func (p *Provider) Discover(ctx context.Context, domain string) ([]discovery.Ass
 		return nil, fmt.Errorf("crt.sh returned status %d", resp.StatusCode)
 	}
 
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
 	var entries []struct {
 		NameValue string `json:"name_value"`
 	}
-	if err := json.NewDecoder(resp.Body).Decode(&entries); err != nil {
-		return nil, err
+	if err := json.Unmarshal(body, &entries); err != nil {
+		preview := string(body)
+		if len(preview) > 256 {
+			preview = preview[:256]
+		}
+		return nil, fmt.Errorf("crtsh: %w (body: %s)", err, preview)
 	}
 
 	seen := make(map[string]struct{})
